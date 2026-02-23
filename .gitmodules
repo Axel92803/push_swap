@@ -7,3 +7,12 @@
 [submodule "utils/libft"]
 	path = utils/libft
 	url = git@github.com:Axel92803/libft.git
+[submodule "submodule_utils/libft"]
+	path = submodule_utils/libft
+	url = git@github.com:Axel92803/libft.git
+[submodule "submodule_utils/GNL"]
+	path = submodule_utils/GNL
+	url = git@github.com:Axel92803/GNL.git
+[submodule "submodule_utils/ft_printf"]
+	path = submodule_utils/ft_printf
+	url = git@github.com:Axel92803/ft_printf.git
