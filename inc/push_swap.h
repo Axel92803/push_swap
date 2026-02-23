@@ -1,9 +1,9 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "../utils/ft_printf/ft_printf.h"
-# include "../utils/GNL/get_next_line.h"
-# include "../utils/libft/libft.h"
+# include "../submodule_utils/ft_printf/ft_printf.h"
+# include "../submodule_utils/GNL/get_next_line.h"
+# include "../submodule_utils/libft/libft.h"
 
 typedef struct s_node
 {
