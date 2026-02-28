@@ -12,6 +12,14 @@ typedef struct s_node
 	struct s_node	*prev;
 }t_node;
 
+typedef enum e_strategy
+{
+	SIMPLE,
+	MEDIUM,
+	COMPLEX,
+	ADAPTIVE
+} t_strategy;
+
 /*COMMANDS*/
 
 void	pa(t_node **a, t_node **b);
@@ -29,6 +37,10 @@ void	rra(t_node **a);
 void	rrb(t_node **b);
 void	rrr(t_node **a, t_node **b);
 
+/*PARSING*/
+
+int	parse_arg(int argc, char **argv, t_strategy *strategy);
+int	parse_num(int argc, char **argv, int start, t_node a);
 
 /*UTILS*/
 
