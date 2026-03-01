@@ -2,15 +2,23 @@
 
 static void	swap(t_node **stack)
 {
-	if (!*stack || !(*stack)->next)
+	t_node	*tail;
+
+	if (!*stack || (*stack)->next == *stack)
 		return ;
-	*stack = (*stack)->next;
-	(*stack)->prev->prev = *stack;
-	(*stack)->prev->next = (*stack)->next;
-	if ((*stack)->next)
+	if ((*stack)->next->next == *stack)
+		*stack = (*stack)->next;
+	else
+	{
+		tail = (*stack)->prev;
+		*stack = (*stack)->next;
+		(*stack)->prev->next = (*stack)->next;
+		(*stack)->prev->prev = (*stack);
 		(*stack)->next->prev = (*stack)->prev;
-	(*stack)->next = (*stack)->prev;
-	(*stack)->prev = NULL;
+		(*stack)->next = (*stack)->prev;
+		(*stack)->prev = tail;
+		tail->next = *stack;
+	}
 }
 
 void	sa(t_node **a)

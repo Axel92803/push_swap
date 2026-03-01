@@ -2,19 +2,9 @@
 
 static void	rev_rotate(t_node **stack)
 {
-	t_node	*old;
-	t_node	*last;
-
-	if(!*stack || !(*stack)->next)
+	if(!*stack || (*stack)->next == *stack)
 		return ;
-
-	last = find_last(*stack);
-	last->prev->next = NULL;
-	last->prev = NULL;
-	old = *stack;
-	*stack = last;
-	(*stack)->next = old;
-	old->prev = *stack;
+	*stack = (*stack)->prev;
 }
 
 void	rra(t_node **a)

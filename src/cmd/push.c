@@ -1,26 +1,46 @@
 #include "../../inc/push_swap.h"
 
+static t_node *pop(t_node **src)
+{
+	t_node *node;
+
+	node = NULL;
+	if (!*src)
+		return node;
+	node = *src;
+	if ((*src)->next == *src)
+		*src = NULL;
+	else
+	{
+		*src = (*src)->next;
+		(*src)->prev = node->prev;
+		node->prev->next = *src;
+	}
+	node->next = NULL;
+	node->prev = NULL;
+	return (node);
+}
+
 static void	push(t_node **dst, t_node **src)
 {
-	t_node *tmp;
+	t_node *new_node;
 
-	if (!*src)
+	new_node = pop(src);
+	if (!new_node)
 		return ;
-	tmp = *src;
-	*src = (*src)->next;
-	if (*src)
-		(*src)->prev = NULL;
-	tmp->prev = NULL;
 	if (!*dst)
 	{
-		*dst = tmp;
-		tmp->next = NULL;
+		*dst = new_node;
+		(*dst)->next = *dst;
+		(*dst)->prev = *dst;
 	}
 	else
 	{
-		tmp->next = *dst;
-		tmp->next->prev = tmp;
-		*dst = tmp;
+		new_node->next = *dst;
+		new_node->prev = (*dst)->prev;
+		(*dst)->prev->next = new_node;
+		(*dst)->prev = new_node;
+		*dst = new_node;
 	}
 }
 
