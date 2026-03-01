@@ -39,12 +39,22 @@ void	rrr(t_node **a, t_node **b);
 
 /*PARSING*/
 
-int	parse_arg(int argc, char **argv, t_strategy *strategy);
-int	parse_num(int argc, char **argv, int start, t_node a);
+char	***split_arg(int argc, char **argv);
+int		count_args(char ***args);
+int		parse_arg(int argc, char **argv, t_strategy *strategy);
+int		parse_num(char ***args, t_node **a);
 
-/*UTILS*/
+/*UTILS -- ERROR*/
 
-t_node *find_last(t_node *stack);
+int		syntax_err(char *argv);
+int		dup_err(t_node **a, int num);
+void	free_err(t_node **stack);
+void	free_arr_err(int *arr);
+void	free_args(char ***args, int index);
 
+/*STACK*/
+
+void	append_node(t_node **a, int num);
+double	disorder_calc(int *nums, int size);
 
 #endif
