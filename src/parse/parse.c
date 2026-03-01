@@ -1,6 +1,6 @@
 #include "../../inc/push_swap.h"
 
-static char	***split_arg(int argc, char **argv)
+char	***split_arg(int argc, char **argv)
 {
 	char	***args;
 	int		i;
@@ -22,6 +22,27 @@ static char	***split_arg(int argc, char **argv)
 	}
 	args[i] = NULL;
 	return (args);
+}
+
+int	count_args(char ***args)
+{
+	int	count;
+	int	i;
+	int	j;
+
+	count = 0;
+	i = 0;
+	while (args[i])
+	{
+		j = 0;
+		while(args[i][j])
+		{
+			count++;
+			j++;
+		}
+		i++;
+	}
+	return (count);
 }
 
 int	parse_arg(int argc, char **argv, t_strategy *strategy)
@@ -46,31 +67,36 @@ int	parse_arg(int argc, char **argv, t_strategy *strategy)
 	return (i);
 }
 
-int	parse_num(int argc, char **argv, t_node **a)
+int	*parse_num(char ***args, t_node **a)
 {
 
 	int	i;
 	int j;
+	int	z;
+	int *num_arr;
 	long	num;
-	char	***args;
 
 	i = 0;
-	args = split_arg(argc, argv);
-	while(i < argc)
+	z = 0;
+	num_arr = (int *)malloc(sizeof(int) * (count_args(args) + 1));
+	while(args[i])
 	{
 		j = 0;
 		while(args[i][j])
 		{
-			if (!syntax_err(argv[i][j]))
+			if (!syntax_err(args[i][j]))
 				free_err(a);
-			num = ft_atol(argv[i][j]);
+			num = ft_atol(args[i][j]);
 			if (num < INT_MIN || num > INT_MAX)
 				free_err(a);
 			if (!dup_err(a, (int)num))
 				free_err(a);
 			append_node(a, (int)num);
+			num_arr[z] = (int)num;
 			j++;
+			z++;
 		}
 		i++;
 	}
+	return (num_arr);
 }
