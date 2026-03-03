@@ -40,9 +40,9 @@ int	dup_err(t_node **a, int num)
 }
 
 
-void free_err(t_node **stack)
+void	free_err(t_node **stack)
 {
-	free(stack);
-	printf("Error\n");
+	free(*stack);
+	ft_putstr_fd("Error\n", 2);
 	exit(1);
 }
