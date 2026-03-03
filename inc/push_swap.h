@@ -1,8 +1,6 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "../submodule_utils/ft_printf/ft_printf.h"
-# include "../submodule_utils/GNL/get_next_line.h"
 # include "../submodule_utils/libft/libft.h"
 
 typedef struct s_node
@@ -42,7 +40,7 @@ void	rrr(t_node **a, t_node **b);
 char	***split_arg(int argc, char **argv);
 int		count_args(char ***args);
 int		parse_arg(int argc, char **argv, t_strategy *strategy);
-int		parse_num(char ***args, t_node **a);
+int		*parse_num(char ***args, t_node **a);
 
 /*UTILS -- ERROR*/
 
@@ -51,6 +49,8 @@ int		dup_err(t_node **a, int num);
 void	free_err(t_node **stack);
 void	free_arr_err(int *arr);
 void	free_args(char ***args, int index);
+void	free_stack(t_node **stack);
+void	err(void);
 
 /*STACK*/
 
