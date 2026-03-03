@@ -4,9 +4,11 @@ void	append_node(t_node **a, int num)
 {
 	t_node	*new;
 
+	if (!a)
+		err();
 	new = (t_node *)malloc(sizeof(t_node));
 	if (!new)
-		free_err(a);
+		free_err(&new);
 	new->val = num;
 	if (!*a)
 	{
