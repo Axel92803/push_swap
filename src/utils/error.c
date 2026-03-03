@@ -46,3 +46,9 @@ void	free_err(t_node **stack)
 	ft_putstr_fd("Error\n", 2);
 	exit(1);
 }
+
+void	err(void)
+{
+	ft_putstr_fd("Error\n", 2);
+	exit(1);
+}
