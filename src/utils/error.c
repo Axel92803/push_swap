@@ -22,27 +22,43 @@ int	syntax_err(char *argv)
 	return (1);
 }
 
-int	dup_err(t_node **a, int num)
+int dup_err(int *sort_arr, int size)
 {
-	t_node *tmp;
-	if (!*a)
-		return (1);
-	tmp = *a;
-	while (tmp->next != *a)
+	int i;
+
+	i = 0;
+	while (i < size - 1)
 	{
-		if (tmp->val == num)
-			return (0);
-		tmp = tmp->next;
+		if (sort_arr[i] == sort_arr[i + 1])
+			return (1);
+		i++;
 	}
-	if (tmp->val == num)
-		return (0);
-	return (1);
+	return (0);
 }
 
-
-void free_err(t_node **stack)
+void err_free_args(char ***args, int index)
 {
-	free(stack);
-	printf("Error\n");
+
+	int	i;
+
+	i = 0;
+	while (i < index)
+	{
+		free_block(args[i]);
+		i++;
+	}
+	free(args);
+}
+
+void	free_err(t_node **stack)
+{
+	free_stack(stack);
+	ft_putstr_fd("Error\n", 2);
+	exit(1);
+}
+
+void	err(void)
+{
+	ft_putstr_fd("Error\n", 2);
 	exit(1);
 }

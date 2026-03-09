@@ -1,4 +1,4 @@
-#include "../../inc/push_swap.h"
+ #include "../../inc/push_swap.h"
 
 double disorder_calc(int *nums, int size)
 {
@@ -7,22 +7,21 @@ double disorder_calc(int *nums, int size)
 	int mistakes;
 	int total_pairs;
 
-	if (!nums)
+	if (!nums || size <= 1)
 		return (0);
 	i = 0;
 	mistakes = 0;
-	total_pairs = 0;
+	total_pairs = ((size * (size - 1)) / 2);
 	while(i < size)
-	{
+	{	
 		j = i + 1;
 		while (j < size)
 		{
-			total_pairs += 1;
 			if(nums[i] > nums[j])
 				mistakes += 1;
 			j++;
 		}
 		i++;
 	}
-	return (mistakes / total_pairs);
+	return ((double)mistakes / total_pairs);
 }

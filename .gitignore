@@ -1,1 +1,4 @@
 *.pdf
+*.o
+*.json
+push_swap

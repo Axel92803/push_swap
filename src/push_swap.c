@@ -2,25 +2,37 @@
 
 static double gargantua(int argc, char **argv, t_node **a, t_strategy *flag)
 {
-	char ***args;
+	char	***args;
 	int		*flat_array;
 	int		size;
 	double	dis;
+	int		start;
+	int		i;
 
-	args = split_arg(argc, argv);
-	size = count_args(args);
-	flat_array = parse_num(args, a);
-	parse_arg(argc, argv, flag);
+	start = parse_arg(argc, argv, flag);
+	args = split_arg(argc, argv, start, &size);
+	flat_array = parse_num(args, size);
+
+	i = 0;
+	while (i < size)
+	{
+		append_node(a, flat_array[i]);
+		i++;
+	}
+
 	dis = disorder_calc(flat_array, size);
 
 	free(flat_array);
-	free_args(args, argc - parse_arg(argc, argv, flag));
+	free_all_args(args);
 
 	return (dis);
 }
 
 static void	selector(t_node	**a, t_node	**b, double	dis, t_strategy flag)
 {
+	(void)a;
+	(void)b;
+
 	if (flag == ADAPTIVE)
 	{
 		if (dis < 0.2)
@@ -31,11 +43,27 @@ static void	selector(t_node	**a, t_node	**b, double	dis, t_strategy flag)
 			flag = COMPLEX;
 	}
 	if (flag == SIMPLE)
-		sort_simple(a, b);
+		return ;	//sort_simple(a, b);
 	else if (flag == MEDIUM)
-		sort_medium(a, b);
+		return ;	//sort_medium(a, b);
 	else if (flag == COMPLEX)
-		sort_complex(a, b);
+		return ;	//sort_complex(a, b);
+}
+
+static void	print_stack(t_node **a)
+{
+	t_node	*tail;
+
+	if (!*a)
+		return ;
+	tail = (*a)->prev;
+	while ((*a)->next != tail)
+	{
+		printf("%d\n", (*a)->val);
+		*a = (*a)->next;
+	}
+	printf("%d\n", tail->val);
+	return ;
 }
 
 int	main(int argc, char **argv)
@@ -51,6 +79,8 @@ int	main(int argc, char **argv)
 	b = NULL;
 	dis = gargantua(argc, argv, &a, &flag);
 	selector(&a, &b, dis, flag);
+	print_stack(&a);
+	free_stack(&a);
 	return (0);
 }
 

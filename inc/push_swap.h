@@ -1,13 +1,13 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "../submodule_utils/ft_printf/ft_printf.h"
-# include "../submodule_utils/GNL/get_next_line.h"
-# include "../submodule_utils/libft/libft.h"
+# include "../submodule_utils/libft/inc/libft.h"
+# include <stdio.h>
 
 typedef struct s_node
 {
 	int				val;
+	int				index;
 	struct s_node	*next;
 	struct s_node	*prev;
 }t_node;
@@ -39,18 +39,31 @@ void	rrr(t_node **a, t_node **b);
 
 /*PARSING*/
 
-char	***split_arg(int argc, char **argv);
-int		count_args(char ***args);
-int		parse_arg(int argc, char **argv, t_strategy *strategy);
-int		parse_num(char ***args, t_node **a);
+char		***split_arg(int argc, char **argv, int start, int *tot_len);
+int			parse_arg(int argc, char **argv, t_strategy *strategy);
+int			*parse_num(char ***args, int size);
+void	process_num(char *str, int *num_arr, char ***args, int *z);
 
-/*UTILS -- ERROR*/
+/*ERROR*/
 
 int		syntax_err(char *argv);
-int		dup_err(t_node **a, int num);
+int 	dup_err(int *sort_arr, int size);
 void	free_err(t_node **stack);
-void	free_arr_err(int *arr);
-void	free_args(char ***args, int index);
+void	err_free_args(char ***args, int index);
+void	err(void);
+
+/*UTILS*/
+
+void	free_stack(t_node **stack);
+void	abort_parse(char ***args, int *num_arr);
+void	free_all_args(char ***args);
+void	free_block(char **sub_args);
+
+/*INDEXING*/
+
+void    swap_n(int *a, int *b);
+void    quick_sort(int *arr, int low, int high);
+
 
 /*STACK*/
 
