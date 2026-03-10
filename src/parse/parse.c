@@ -11,7 +11,7 @@ char	***split_arg(int argc, char **argv, int start, int *tot_len)
 	args = (char ***)malloc(sizeof(char **) * (argc - start + 1));
 	if (!args)
 		return (NULL);
-	while (((argc >= 3 && start == 2) || (argc >= 2 && start == 1)) && start < argc)
+	while (start < argc)
 	{
 		args[i] = ft_split(argv[start], ' ');
 		if (!args[i])

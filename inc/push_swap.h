@@ -62,12 +62,14 @@ void	free_block(char **sub_args);
 /*INDEXING*/
 
 void    swap_n(int *a, int *b);
-void    quick_sort(int *arr, int low, int high);
+void	quick_sort(int *arr, int *rank_arr, int low, int high);
+int		*rank_sort(int *arr, int size);
+int *copy_array(int *arr, int size);
 
 
 /*STACK*/
 
-void	append_node(t_node **a, int num);
+void	append_node(t_node **a, int num, int rank);
 double	disorder_calc(int *nums, int size);
 
 #endif

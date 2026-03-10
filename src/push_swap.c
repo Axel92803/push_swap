@@ -4,6 +4,7 @@ static double gargantua(int argc, char **argv, t_node **a, t_strategy *flag)
 {
 	char	***args;
 	int		*flat_array;
+	int		*rank;
 	int		size;
 	double	dis;
 	int		start;
@@ -12,17 +13,19 @@ static double gargantua(int argc, char **argv, t_node **a, t_strategy *flag)
 	start = parse_arg(argc, argv, flag);
 	args = split_arg(argc, argv, start, &size);
 	flat_array = parse_num(args, size);
+	rank = rank_sort(flat_array, size);
 
 	i = 0;
 	while (i < size)
 	{
-		append_node(a, flat_array[i]);
+		append_node(a, flat_array[i], rank[i]);
 		i++;
 	}
 
 	dis = disorder_calc(flat_array, size);
 
 	free(flat_array);
+	free(rank);
 	free_all_args(args);
 
 	return (dis);
@@ -57,12 +60,14 @@ static void	print_stack(t_node **a)
 	if (!*a)
 		return ;
 	tail = (*a)->prev;
-	while ((*a)->next != tail)
+	while ((*a) != tail)
 	{
-		printf("%d\n", (*a)->val);
+		printf("%d ", (*a)->val);
+		printf("%d\n", (*a)->index);
 		*a = (*a)->next;
 	}
-	printf("%d\n", tail->val);
+	printf("%d ", tail->val);
+	printf("%d\n", tail->index);
 	return ;
 }
 

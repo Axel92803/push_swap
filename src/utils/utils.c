@@ -21,7 +21,7 @@ void	free_stack(t_node **stack)
 	t_node	*next;
 	t_node	*tmp;
 
-	if(!*stack || !stack)
+	if(!stack || !*stack)
 		return ;
 	head = (*stack);
 	tmp = head->next;

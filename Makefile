@@ -7,7 +7,7 @@ OBJ_DIR				= obj/
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -Wpadded -g3 -I
+CFLAGS = -Wall -Wextra -Wpadded -g3 -I
 
 RM = rm -f
 

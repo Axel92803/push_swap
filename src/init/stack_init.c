@@ -1,6 +1,6 @@
 #include "../../inc/push_swap.h"
 
-void	append_node(t_node **a, int num)
+void	append_node(t_node **a, int num, int rank)
 {
 	t_node	*new;
 
@@ -10,6 +10,7 @@ void	append_node(t_node **a, int num)
 	if (!new)
 		free_err(&new);
 	new->val = num;
+	new->index = rank;
 	if (!*a)
 	{
 		*a = new;

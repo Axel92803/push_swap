@@ -1,6 +1,6 @@
 #include "../../inc/push_swap.h"
 
-static int *copy_array(int *arr, int size)
+int *copy_array(int *arr, int size)
 {
 	int *copy;
 	int i;
@@ -28,7 +28,7 @@ static void	validate_duplicates(int *num_arr, int size, char ***args)
 		free_all_args(args);
 		err();
 	}
-	quick_sort(sorted_arr, 0, size - 1);
+	quick_sort(sorted_arr, NULL, 0, size - 1);
 	if (dup_err(sorted_arr, size))
 	{
 		free(sorted_arr);
